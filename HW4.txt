@@ -1,0 +1,65 @@
+#Jeffrey Wongo
+#913190114
+#I acknowledge that I have neither given nor received aid on this assignment.
+
+def multiplyNums(listA):
+    ListB = []
+    for num in listA:
+        if num == listA[-1]:
+            num = num**2
+        else:
+            num = num * listA[listA.index(num) + 1]
+        ListB.append(num)
+    return ListB
+
+def multiplyNums2(a):
+    b = a
+    return multiplyNums(b)
+
+def pairExists(List1, number):
+    for ch in List1:
+        List2 = List1[-1:List1.index(ch):-1]
+        amt = 0
+        while amt < len(List2):
+            if ch + List2[amt] == number:
+                return True
+                break
+            else:
+                amt += 1
+    return False
+
+def listSymmetric(List1):
+    List2 = List1[::-1]
+    return List2 == List1
+
+def replaceStr(parent,original,replacement):
+    return parent.replace(original,replacement)
+
+def polyAlphaCipher(String1, increment):
+    String2 = ''
+    num = 1
+    for ch in String1:
+        newVal = ord(ch) + num      #adds current num to ASCII value
+        newch = chr(newVal)         #new character
+        if newVal > 255:
+            newVal = newVal % 256   #make sure ASCII value isn't gr than 255
+        #print(newVal)               #these values match the ones on piazza
+        num = num + increment       #increment number
+        String2 = String2 + newch
+    return String2                  #the output looks kinda different than piazza but the earlier ASCII values did match
+
+def polyAlphaDecipher(String2, increment):
+    String1 = ''
+    num = 1
+    for ch in String2:
+        oldVal = ord(ch) - num
+        oldch = chr(oldVal)
+        #print(oldVal)
+        num = num + increment
+        String1 = String1 + oldch
+    return String1
+
+
+        
+
+        

@@ -1,0 +1,131 @@
+#Jeffrey Wongo
+#903190114
+#I acknowledge that I have neither given nor received aid on this assignment.
+
+def defineTAs(tup):
+    name1 = tup[0][0]
+    name2 = tup[0][1]
+    name3 = tup[0][2]
+    age1 = str(tup[1][0])
+    age2 = str(tup[1][1])
+    age3 = str(tup[1][2])
+    company1 = tup[2][0]
+    company2 = tup[2][1]
+    company3 = tup[2][2]
+    infoTA1 = (company1 + ': ' + name1 + ', ' + age1)
+    infoTA2 = (company2 + ': ' + name2 + ', ' + age2)
+    infoTA3 = (company3 + ': ' + name3 + ', ' + age3)
+    finalInfo = ((infoTA1), (infoTA2), (infoTA3))
+    return finalInfo
+
+
+def offset(tuple_1, tuple_2, index_1):
+    list1 = list(tuple_1)
+    list2 = list(tuple_2)
+    list3 = [index_1]
+    index_1 = list1[index_1]
+    for ch in (list1):
+        if index_1 == 0:
+            list3 = list3 + [index_1]
+            break
+        num2 = list2[index_1]
+        list3 = list3 + [index_1] + [num2]
+        if index_1 == 0 or num2 == 0:
+            break
+        else:
+            index_1 = list1[num2]
+    return tuple(list3)
+
+
+def heroEgos(heroes):               #create two loops with the second one indexing into the value lists
+    list1 = list(heroes.keys())     #make 2 lists
+    list2 = list(heroes.values())
+    blank = []
+    for ch in range(len(list1)):
+        for i in range(len(list2[ch])):
+            if list1[ch] in list2[ch][i]:
+                blank.append(list2[ch][i])
+            else:
+                continue
+    return blank
+
+
+def createActors(directors, movies):
+    directorList = list(directors.keys())
+    directorMovies = list(directors.values())
+    #print(directorList)
+    #print(directorMovies)
+    movieList = list(movies.keys())
+    actorList = list(movies.values())
+    #print(movieList)
+    #print(actorList)
+    blank = {}
+    for ch in range(len(actorList)):
+        if movieList[ch] in directorMovies:
+            blank[actorList[ch]] = tuple([movieList[ch]]+[directorList[directorMovies.index(movieList[ch])]])
+    return blank
+
+
+def updateNetworks(networks, tv_shows):
+    networkList = list(networks.keys())
+    showsList1 = list(networks.values())
+    #print(networkList)
+    #print(showsList1)
+    #blank = {}
+    for tuples in tv_shows:
+        if tuples[0] in networkList and tuples[1] in showsList1[networkList.index(tuples[0])]:
+            del networks[tuples[0]][networks[tuples[0]].index(tuples[1])]     #remove show in list of shows
+
+        elif tuples[0] not in networkList:
+            networks[tuples[0]] = [tuples[1]]       #add network and show to dictionary
+            networkList = list(networks.keys())     #update list of networks
+            showsList1 = list(networks.values())    #update list of shows
+            #print(networkList)
+            #print(showsList1)
+            
+        elif tuples[0] in networkList and tuples[1] not in showsList1[networkList.index(tuples[0])]:
+            networks[tuples[0]].append(tuples[1])    #add show to list of shows in dictionary
+
+    return networks
+
+
+def artistMishap(artists):
+    artistNames = artists.keys()
+    #print(artistNames)
+    for ch in artistNames:
+        if artists[ch] % 2 != 0:    #if number is odd
+            if artists[ch] % 7 == 0:     #if number is a multiple of 7
+                artists[ch] += 7
+            if artists[ch] % 5 == 0:    #if number is multiple of 5
+                artists[ch] //= 5
+            elif artists[ch] % 3 == 0:    #if number is multiple of 3
+                artists[ch] -= 3
+            #print(artists[ch])
+        elif artists[ch] % 2 == 0:  #if number is even
+            if artists[ch] % 7 == 0:    #if number is multiple of 7
+                artists[ch] -= 7
+            if artists[ch] % 5 == 0:    #if number is multiple of 5
+                artists[ch] += 5
+            if artists[ch] % 3 == 0:    #if number is multiple of 3
+                artists[ch] *= 3
+            artists[ch] **=2     #square number
+            #print(artists[ch])
+    #print(artists)
+    blank = ()
+    updatedRecords = list(artists.values())
+    #print(updatedRecords)
+    updatedRecords.sort()
+    #print(updatedRecords)
+    minRecord = updatedRecords[0]
+    maxRecord= updatedRecords[-1]
+    for i in artists.keys():    #matching min record with artist
+        if artists[i] == minRecord:
+            minArtist = i
+            break
+    for a in artists.keys():
+        if artists[a] == maxRecord:     #matching max record with artist
+            maxArtist = a
+            break
+    return ((minArtist, minRecord), (maxArtist, maxRecord))
+            
+            
